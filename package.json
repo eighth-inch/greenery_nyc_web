@@ -1,0 +1,35 @@
+{
+  "name": "GreeneryNYC",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "express": "^4.16.4",
+    "pg": "^7.4.3",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "sequelize": "^4.42.0",
+    "supertest": "^3.3.0",
+    "supertest-as-promised": "^4.0.2",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "chai": "^4.2.0"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --watch",
+    "webpack": "./node_modules/webpack/bin/webpack.js",
+    "start:dev": "npm run webpack -- --watch --mode=development & DATABASE_URL=postgres://localhost/my_db nodemon /server/server.js --ignore src/ --ignore dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
