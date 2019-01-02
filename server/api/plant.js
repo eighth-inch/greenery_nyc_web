@@ -10,9 +10,10 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next)=> {
     console.log('the request is: ' + util.inspect(req));
     console.log('the request body is: ' + util.inspect(req));
-    const { name, light_required } = req.body;
+    const { plant } = req.body;
+    const { name, light_required } = plant;
     return Plant.create({ name, light_required })
-        .then(plant => res.send(plant));
+        .then(_plant => res.send(_plant));
 })
 
 router.get('/:id', (req, res, next) => {
