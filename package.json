@@ -9,11 +9,14 @@
     "babel-loader": "^7.1.5",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "path": "^0.12.7",
     "pg": "^7.4.3",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
     "sequelize": "^4.42.0",
     "supertest": "^3.3.0",
     "supertest-as-promised": "^4.0.2",
@@ -27,7 +30,7 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --watch",
     "webpack": "./node_modules/webpack/bin/webpack.js",
-    "start:dev": "npm run webpack -- --watch --mode=development & DATABASE_URL=postgres://localhost/my_db nodemon /server/server.js --ignore src/ --ignore dist"
+    "start:dev": "npm run webpack -- --watch --mode=development & DATABASE_URL=postgres://localhost/greenery_nyc nodemon ./server/app.js --ignore src/ --ignore dist"
   },
   "keywords": [],
   "author": "",

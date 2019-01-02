@@ -25,6 +25,10 @@ const Plant = conn.define('plant', {
     name: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    light_required: {
+        type: Sequelize.ENUM('low', 'med', 'high'),
+        allowNull: false
     }
 });
 
