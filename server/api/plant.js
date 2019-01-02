@@ -1,3 +1,4 @@
+const util = require('util');
 const router = require('express').Router();
 const { Plant } = require('../db').models;
 
@@ -7,8 +8,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next)=> {
-    console.log('the request is: ' + req);
-    console.log('the request body is: ' + req.body);
+    console.log('the request is: ' + util.inspect(req));
+    console.log('the request body is: ' + util.inspect(req));
     const { name, light_required } = req.body;
     return Plant.create({ name, light_required })
         .then(plant => res.send(plant));
