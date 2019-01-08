@@ -31,7 +31,7 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --watch",
     "webpack": "./node_modules/webpack/bin/webpack.js",
-    "start:dev": "npm run webpack -- --watch --mode=development & DATABASE_URL=postgres://localhost/greenery_nyc nodemon ./server/app.js --ignore src/ --ignore dist",
+    "start:dev": "npm run webpack -- --watch --mode=development & DATABASE_URL=postgres://localhost/greenery_nyc nodemon ./server/app.js --ignore src/ --ignore public/",
     "start": "node ./server/app.js",
     "postinstall": "npm run webpack"
   },

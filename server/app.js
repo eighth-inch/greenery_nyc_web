@@ -22,15 +22,16 @@ app.get('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(500).send('Something broke!')
+  })
 
 module.exports = app;
 
 //Commented out durring testing 
 app.listen(PORT, ()=> {
     sync().then(()=> seed());
-    console.log("it's....");
-    setTimeout(() => {
-      console.log(`....alive... App Listening on port: ${PORT}`);
-    }, 500);
+    console.log(`it's....alive... App Listening on port: ${PORT}`);
 });
 

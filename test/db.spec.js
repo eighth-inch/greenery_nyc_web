@@ -9,10 +9,10 @@ const { models, sync, seed } = require('../server/db');
 const { Plant, User } = models;
 
 describe('db models', ()=> {
-    // beforeEach(()=> {
-    //     return sync({ force: true })
-    //         .then(()=> seed());
-    // })
+    beforeEach(()=> {
+        return sync({ force: true })
+            .then(()=> seed());
+    })
 
     describe('Plant data model ', ()=> {
         // Plant Model responds with a JSON object.
@@ -43,6 +43,18 @@ describe('db models', ()=> {
                 })
         })
     })
+
+//     describe('User data model', ()=> {
+//         it('returns a predeictable collection of objects',   ()=> {
+//             return User.findAll()
+//                 .then(users => {
+//                     users.forEach(user => {
+//                         expect(user).to.be.an('object');
+//                         expect(user).to.have.a.property('user');
+//                         expect(user).to.have.a.property('password');
+//                     })
+//                 })
+//         })
+//     })
+    
 })
-
-

@@ -3,7 +3,12 @@ const Plant = require('./models/Plant');
 const User = require('./models/User');
 
 const sync = async ()=> {
-    await conn.sync({ force: true});
+    try {
+        await conn.sync({ force: true});
+    }
+    catch (err) {
+        console.error(err);
+    }
 }
 
 const seed = ()=> {
@@ -23,3 +28,5 @@ module.exports = {
         User
     }
 }
+
+

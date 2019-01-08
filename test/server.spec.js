@@ -3,11 +3,10 @@ const app = require('../server/app.js');
 const supertest = require('supertest')(app)
 
 
-describe('tests', ()=> {
-    it('are running', ()=> {
-        expect(false).to.be.not.ok;
-    })
-});
+// describe('Authentication', ()=> {
+//     it('')
+
+// })
 
 describe('Server', ()=> {
     it('responds to http GET requests with status 200', ()=> {
@@ -25,12 +24,32 @@ describe('API Routes', ()=> {
             .expect('Content-Type', /json/) // tests response header
     })
 
+    it('GET takes a string querie, such as "api/plants?light_requirement=low", and responds with only applicable plants', ()=> {
+        return supertest
+            .get('/api/plants?light_required=low')
+            .expect(200)
+            .expect(res => {
+                expect(res.body.plants.length).to.equal(1)
+            })
+    })
+
+    it('GET takes a complex string querie, such as "api/plants?light_requirement=low,med", and responds with only applicable plants', ()=> {
+        return supertest
+            .get('/api/plants?light_required=low,med')
+            .expect(200)
+            .expect(res => {
+                expect(res.body.plants.length).to.equal(2)
+            })
+    })
+
     it('POST "/api/plants" creates a new Plant row and returns as OBJECT', ()=> {
         return supertest
             .post('/api/plants')
-            .send({ 
-                name: 'Snake Plant', 
-                light_required: 'med' 
+            .send({
+                plant: { 
+                    name: 'Snake Plant', 
+                    light_required: 'med' 
+                }
             })
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')    
@@ -44,9 +63,11 @@ describe('API Routes', ()=> {
     it('GET "/api/plants/(id)" finds a plant by ID and returns as JSON OBJECT', ()=> {
         return supertest
             .post('/api/plants')
-            .send({ 
-                name: 'Silver Cactus', 
-                light_required: 'high' 
+            .send({
+                plant: { 
+                    name: 'Snake Plant', 
+                    light_required: 'med' 
+                }
             })
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')    
