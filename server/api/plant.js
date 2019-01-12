@@ -35,15 +35,59 @@ router.post('/', (req, res, next)=> {
 
 router.get('/:id', (req, res, next) => {
     const { id } = req.params;
-    return Plant.findOne({ where: { id } })
+    return Plant.findByPk(id)
         .then(_plant => {
-            console.log('plant is : ' + _plant)
-            res.send({ plant: _plant })
+            if (_plant) {
+                res.send({ plant: _plant })
+            } 
+            else {
+                res.sendStatus(404);
+            }
         })
-        .next();
+        .catch(err => {
+            res.sendStatus(404);
+            next(err);
+        })
 
         //Needs not found handling
 });
+
+router.put('/:id', (req, res, next) => {
+    const { id } = req.params;
+    const { plant } = req.body;
+    const { name, light_required } = plant;
+    let update = {
+        name: '',
+        light_required: ''
+    };
+
+    return Plant.findByPk(id)
+        .then(_plant => {
+            console.log('plant name is: ', _plant.name);
+            update.light_required = light_required ? light_required : _plant.light_required
+            update.name = name ? name : _plant.name;
+
+            Plant.update(update, { where: { id } })
+                .then(response => {
+                    if (response[0] == 1) {
+                        return Plant.findByPk(id)
+                            .then(plant => res.send(plant))
+                    }
+                    else {
+                        res.sendStatus(400)
+                    }
+                })
+                .catch(err => {
+                    res.sendStatus(400);
+                    next(err)
+                })
+        })
+    
+        .catch(err => {
+            res.sendStatus(404);
+            next(err);
+        })
+})
 
 router.delete('/:id', (req, res, next)=> {
     const { id } = req.params;
